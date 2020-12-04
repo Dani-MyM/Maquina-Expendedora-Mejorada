@@ -80,7 +80,9 @@
                 descuentoPremio = 0.10;
                 double
                 descuentoTotal = 0;
-                descuentoTotal = ((precioBillete * descuentoPremio)/100);  }
+                descuentoTotal = ((precioBillete * descuentoPremio)/100);
+                System.out.println("¡HAS GANADO UN PREMIO del 10%!: te regalamos " + descuentoTotal + " € para gastar en La Payoza");
+            }
         }
         else {
             System.out.println("Tienes que introducir " + (cantidadDeDineroQueFalta) + " euros mas!");
