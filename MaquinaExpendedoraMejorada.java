@@ -14,12 +14,14 @@
     private int totalBilletesVendidos;
     //Máquina con premios
     private boolean premio;
+    //Maximo de billetes que se encuentran a la venta
+    private int maximoBilletes;
     /**
      * Crea una máquina expendedora de billetes de tren con el 
      * precio del billete y el origen y destino dados. Se asume que el precio
      * del billete que se recibe es mayor que 0.
      */
-    public MaquinaExpendedoraMejorada(int precioDelBillete, String origen, String destino, boolean premioGanado) {
+    public MaquinaExpendedoraMejorada(int precioDelBillete, String origen, String destino, boolean premioGanado, int maximoDeBilletes) {
         precioBillete = precioDelBillete;
         balanceClienteActual = 0;
         totalDineroAcumulado = 0;
@@ -27,6 +29,7 @@
         estacionDestino = destino;
         totalBilletesVendidos = 0;
         premio = premioGanado;
+        maximoBilletes = maximoDeBilletes;
     }
 
     /**
@@ -47,6 +50,8 @@
      * Simula la introduccion de dinero por parte del cliente actual
      */
     public void introducirDinero(int cantidadIntroducida) {
+        if (totalBilletesVendidos < maximoBilletes)
+    {
         if (cantidadIntroducida > 0) {
             balanceClienteActual = balanceClienteActual + cantidadIntroducida;
         }
@@ -54,12 +59,18 @@
             System.out.println(cantidadIntroducida + " no es una cantidad de dinero valida.");
         }        
     }
+    else{
+        System.out.println("ERROR: Maximo de billetes vendidos");
+    }
+}
+        
 
     /**
      * Imprime un billete para el cliente actual
      */
     public void imprimirBillete() {
         int cantidadDeDineroQueFalta = (precioBillete - balanceClienteActual);
+        if (totalBilletesVendidos < maximoBilletes) {
         if (cantidadDeDineroQueFalta <= 0) {        
             // Simula la impresion de un billete
             System.out.println("##################");
@@ -75,6 +86,7 @@
             balanceClienteActual = balanceClienteActual - precioBillete;
             //Conador billetes
             totalBilletesVendidos = totalBilletesVendidos + 1;
+        
             if (premio == true) {
                 double
                 descuentoPremio = 0.10;
@@ -89,6 +101,7 @@
               
         }
     }
+}
     
     /**
      * Vacía todo el dinero que quede en la máquina
