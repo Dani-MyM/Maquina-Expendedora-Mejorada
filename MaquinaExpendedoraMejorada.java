@@ -50,19 +50,18 @@
      * Simula la introduccion de dinero por parte del cliente actual
      */
     public void introducirDinero(int cantidadIntroducida) {
-        if (totalBilletesVendidos < maximoBilletes)
-    {
-        if (cantidadIntroducida > 0) {
-            balanceClienteActual = balanceClienteActual + cantidadIntroducida;
+        if (totalBilletesVendidos < maximoBilletes) {
+            if (cantidadIntroducida > 0) {
+                balanceClienteActual = balanceClienteActual + cantidadIntroducida;
+            }
+            else {
+                System.out.println(cantidadIntroducida + " no es una cantidad de dinero valida.");
+            }        
         }
-        else {
-            System.out.println(cantidadIntroducida + " no es una cantidad de dinero valida.");
-        }        
+        else{
+            System.out.println("ERROR: Maximo de billetes vendidos");
+        }
     }
-    else{
-        System.out.println("ERROR: Maximo de billetes vendidos");
-    }
-}
         
 
     /**
@@ -71,37 +70,39 @@
     public void imprimirBillete() {
         int cantidadDeDineroQueFalta = (precioBillete - balanceClienteActual);
         if (totalBilletesVendidos < maximoBilletes) {
-        if (cantidadDeDineroQueFalta <= 0) {        
+            if (cantidadDeDineroQueFalta <= 0) {        
             // Simula la impresion de un billete
-            System.out.println("##################");
-            System.out.println("# Billete de tren:");
-            System.out.println("# De " + estacionOrigen + " a " + estacionDestino);
-            System.out.println("# " + precioBillete + " euros.");
-            System.out.println("##################");
-            System.out.println();         
+                System.out.println("##################");
+                System.out.println("# Billete de tren:");
+                System.out.println("# De " + estacionOrigen + " a " + estacionDestino);
+                System.out.println("# " + precioBillete + " euros.");
+                System.out.println("##################");
+                System.out.println();         
     
-            // Actualiza el total de dinero acumulado en la maquina
-            totalDineroAcumulado = totalDineroAcumulado + precioBillete;
-            // Reduce el balance del cliente actual dejandole seguir utilizando la maquina
-            balanceClienteActual = balanceClienteActual - precioBillete;
-            //Conador billetes
-            totalBilletesVendidos = totalBilletesVendidos + 1;
+                // Actualiza el total de dinero acumulado en la maquina
+                totalDineroAcumulado = totalDineroAcumulado + precioBillete;
+                // Reduce el balance del cliente actual dejandole seguir utilizando la maquina
+                balanceClienteActual = balanceClienteActual - precioBillete;
+                //Conador billetes
+                totalBilletesVendidos = totalBilletesVendidos + 1;
         
-            if (premio == true) {
-                double
-                descuentoPremio = 0.10;
-                double
-                descuentoTotal = 0;
-                descuentoTotal = ((precioBillete * descuentoPremio)/100);
-                System.out.println("¡HAS GANADO UN PREMIO del 10%!: te regalamos " + descuentoTotal + " € para gastar en La Payoza");
+                if (premio == true) {
+                    if (totalBilletesVendidos % 3 == 0) { 
+                        double
+                        descuentoPremio = 0.10;
+                        double
+                        descuentoTotal = 0;
+                        descuentoTotal = ((precioBillete * descuentoPremio)/100);
+                        System.out.println("¡HAS GANADO UN PREMIO del 10%!: te regalamos " + descuentoTotal + " € para gastar en La Payoza");
+                    }
+                }
+            }
+            else {
+                System.out.println("Tienes que introducir " + (cantidadDeDineroQueFalta) + " euros mas!");
+                  
             }
         }
-        else {
-            System.out.println("Tienes que introducir " + (cantidadDeDineroQueFalta) + " euros mas!");
-              
-        }
     }
-}
     
     /**
      * Vacía todo el dinero que quede en la máquina
